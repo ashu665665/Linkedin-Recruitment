@@ -47,7 +47,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [])
 
   const signUp = async (email: string, password: string, fullName: string) => {
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -58,6 +58,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       },
     })
     if (error) throw error
+    // If signup is successful and user is immediately available (no email confirmation)
+    if (data.user && !data.user.email_confirmed_at) {
+      // The user is created but not confirmed, we'll treat this as successful
+      // since we disabled email confirmation
+      return
+    }
   }
 
   const signIn = async (email: string, password: string) => {

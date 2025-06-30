@@ -27,6 +27,8 @@ export const AuthForm: React.FC<AuthFormProps> = ({ onSuccess }) => {
         await signIn(email, password)
       } else {
         await signUp(email, password, fullName)
+        // After successful signup, automatically sign in the user
+        await signIn(email, password)
       }
       onSuccess?.()
     } catch (err: any) {
