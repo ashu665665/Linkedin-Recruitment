@@ -54,14 +54,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         data: {
           full_name: fullName,
         },
-        emailRedirectTo: undefined, // Disable email confirmation
+        emailRedirectTo: undefined,
       },
     })
+    
     if (error) throw error
-    // If signup is successful and user is immediately available (no email confirmation)
-    if (data.user && !data.user.email_confirmed_at) {
-      // The user is created but not confirmed, we'll treat this as successful
-      // since we disabled email confirmation
+    
+    // The user should be immediately available after signup
+    // No email confirmation required
+    if (data.user) {
+      // User is created and should be automatically signed in
       return
     }
   }

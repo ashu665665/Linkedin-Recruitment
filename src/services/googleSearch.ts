@@ -27,7 +27,6 @@ export const searchLinkedInProfiles = async (tags: string[]): Promise<LinkedInPr
     const query = `site:linkedin.com/in ${tagQuery}`
 
     const url = `https://customsearch.googleapis.com/customsearch/v1?key=${apiKey}&cx=${searchEngineId}&q=${query}&num=10`
-    alert(url);
     
     const response = await fetch(url, {
       method: "GET"

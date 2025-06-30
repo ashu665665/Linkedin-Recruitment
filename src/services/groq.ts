@@ -12,13 +12,9 @@ export const generateJobTags = async (jobDescription: string): Promise<string[]>
         {
           role: "system",
           content: `You are an expert recruiter and job analyst. Your task is to extract 8 to 12 of the most relevant one-word tags from a job description.
-
           Only return a comma-separated list of one-word tags. Do NOT include any extra text, formatting, or multi-word phrases.
-
           While analyzing the job description, focus on what the company is looking for in a candidate — NOT what the company is doing or working on as part of their business.
-
           Do not keep - (Here are the relevant tags extracted from the job description:) in the response.
-
           Extract the following types of tags:
           - Technical skills and programming languages
           - Tools, platforms, and frameworks

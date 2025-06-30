@@ -26,17 +26,24 @@ export const AuthForm: React.FC<AuthFormProps> = ({ onSuccess }) => {
       if (isLogin) {
         await signIn(email, password)
       } else {
+        // For signup, just call signUp - user should be automatically signed in
         await signUp(email, password, fullName)
-        // After successful signup, automatically sign in the user
-        await signIn(email, password)
       }
       onSuccess?.()
     } catch (err: any) {
-      // Check for specific email confirmation error
-      if (err.message && err.message.includes('Email not confirmed')) {
-        setError('Please check your email inbox and click the confirmation link to verify your account before signing in.')
+      // Handle specific error messages
+      if (err.message) {
+        if (err.message.includes('Invalid login credentials')) {
+          setError('Invalid email or password. Please check your credentials and try again.')
+        } else if (err.message.includes('User already registered')) {
+          setError('An account with this email already exists. Please sign in instead.')
+        } else if (err.message.includes('Email not confirmed')) {
+          setError('Account exists but not confirmed. Please try signing in.')
+        } else {
+          setError(err.message)
+        }
       } else {
-        setError(err.message || 'An error occurred')
+        setError('An error occurred. Please try again.')
       }
     } finally {
       setLoading(false)
