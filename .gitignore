@@ -1,0 +1,53 @@
+# Node.js
+node_modules/
+dist/
+.env
+.env.*.local
+*.local
+
+# Vite cache
+.vite/
+
+# IDEs
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Optional: OS files
+*.swp
+*.tmp
+
+# Optional: coverage tools
+coverage/
+nyc_output/
+
+# Optional: Lint/styling
+eslintcache/
+.stylelintcache
+
+# Optional: Testing
+test-output/
+jest.config.js
+*.spec.ts.snap
+
+# Optional: build tools
+*.tsbuildinfo
+
+# Optional: lockfiles (if you're using only one package manager)
+# Remove the one you're not using:
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
