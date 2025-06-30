@@ -83,28 +83,28 @@ export const SearchHistory: React.FC<SearchHistoryProps> = ({ onSelectSearch }) 
   }
 
   return (
-    <div className="space-y-4 px-4 sm:px-0">
-      <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">
+    <div className="w-full max-w-full overflow-hidden">
+      <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 px-4 sm:px-0">
         Search History
       </h2>
 
-      <div className="grid gap-4">
+      <div className="grid grid-cols-1 gap-4 px-4 sm:px-0">
         {searches.map((search) => (
           <div
             key={search.id}
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 hover:shadow-md transition-shadow cursor-pointer"
+            className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 hover:shadow-md transition-shadow cursor-pointer w-full"
             onClick={() => onSelectSearch?.(search)}
           >
             {/* Header Section */}
             <div className="flex flex-col space-y-3 mb-4">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 w-fit">
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between space-y-2 sm:space-y-0 sm:space-x-4">
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 w-fit flex-shrink-0">
                   {search.input_type === 'linkedin_url' ? 'LinkedIn Job' : 'Job Description'}
                 </span>
-                <div className="flex items-center justify-between sm:justify-end space-x-4">
+                <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
                   <div className="flex items-center space-x-1 text-sm text-gray-500 dark:text-gray-400">
                     <Calendar className="h-4 w-4 flex-shrink-0" />
-                    <span className="text-xs sm:text-sm">{formatDate(search.created_at)}</span>
+                    <span className="text-xs sm:text-sm whitespace-nowrap">{formatDate(search.created_at)}</span>
                   </div>
                   <div className="flex items-center space-x-1 text-sm text-gray-500 dark:text-gray-400">
                     <Users className="h-4 w-4 flex-shrink-0" />
@@ -112,10 +112,12 @@ export const SearchHistory: React.FC<SearchHistoryProps> = ({ onSelectSearch }) 
                   </div>
                 </div>
               </div>
-              
-              <p className="text-sm text-gray-600 dark:text-gray-400 break-words leading-relaxed">
-                {truncateText(search.input_text, window.innerWidth < 640 ? 80 : 100)}
-              </p>
+
+              <div className="w-full">
+                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed break-words hyphens-auto">
+                  {truncateText(search.input_text, window.innerWidth < 640 ? 80 : 100)}
+                </p>
+              </div>
             </div>
 
             {/* Generated Tags */}
@@ -127,17 +129,17 @@ export const SearchHistory: React.FC<SearchHistoryProps> = ({ onSelectSearch }) 
                     Tags:
                   </span>
                 </div>
-                <div className="flex flex-wrap gap-1">
+                <div className="flex flex-wrap gap-1.5">
                   {search.generated_tags.slice(0, window.innerWidth < 640 ? 3 : 5).map((tag, index) => (
                     <span
                       key={index}
-                      className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
+                      className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300 break-words"
                     >
                       {tag}
                     </span>
                   ))}
                   {search.generated_tags.length > (window.innerWidth < 640 ? 3 : 5) && (
-                    <span className="text-xs text-gray-400">
+                    <span className="text-xs text-gray-400 py-0.5">
                       +{search.generated_tags.length - (window.innerWidth < 640 ? 3 : 5)} more
                     </span>
                   )}
@@ -151,17 +153,17 @@ export const SearchHistory: React.FC<SearchHistoryProps> = ({ onSelectSearch }) 
                 <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-3">
                   Sample profiles:
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-2.5">
                   {search.linkedin_profiles.slice(0, 3).map((profile) => (
-                    <div key={profile.id} className="flex items-center justify-between min-w-0">
-                      <span className="text-sm text-gray-700 dark:text-gray-300 truncate flex-1 mr-3 min-w-0">
+                    <div key={profile.id} className="flex items-start justify-between w-full min-w-0 gap-3">
+                      <span className="text-sm text-gray-700 dark:text-gray-300 flex-1 min-w-0 break-words leading-tight">
                         {profile.profile_name || 'LinkedIn Profile'}
                       </span>
                       <a
                         href={profile.profile_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 flex-shrink-0 p-1"
+                        className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 flex-shrink-0 p-1 -m-1 touch-manipulation"
                         onClick={(e) => e.stopPropagation()}
                       >
                         <ExternalLink className="h-4 w-4" />
