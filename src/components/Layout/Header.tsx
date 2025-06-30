@@ -19,7 +19,7 @@ export const Header: React.FC = () => {
     <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <div className="flex items-center">
+          <div className="flex items-center min-w-0 flex-1">
             <div className="flex-shrink-0">
               <div className="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center">
                 <svg className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -27,14 +27,14 @@ export const Header: React.FC = () => {
                 </svg>
               </div>
             </div>
-            <div className="ml-4">
-              <h1 className="text-xl font-semibold text-gray-900 dark:text-white">
+            <div className="ml-3 min-w-0">
+              <h1 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white truncate">
                 LinkedIn Recruiter
               </h1>
             </div>
           </div>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2 sm:space-x-4 flex-shrink-0">
             <button
               onClick={toggleTheme}
               className="p-2 rounded-md text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
@@ -47,10 +47,10 @@ export const Header: React.FC = () => {
             </button>
 
             {user && (
-              <div className="flex items-center space-x-3">
-                <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 sm:space-x-3">
+                <div className="hidden sm:flex items-center space-x-2">
                   <User className="h-5 w-5 text-gray-400" />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">
+                  <span className="text-sm text-gray-700 dark:text-gray-300 max-w-32 truncate">
                     {user.email}
                   </span>
                 </div>

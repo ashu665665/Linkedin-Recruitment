@@ -86,12 +86,12 @@ export const Dashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Navigation */}
-        <div className="flex space-x-1 mb-8">
+        <div className="flex space-x-1 mb-6 sm:mb-8 overflow-x-auto">
           <button
             onClick={() => setCurrentView('search')}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+            className={`px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors whitespace-nowrap ${
               currentView === 'search'
                 ? 'bg-blue-600 text-white'
                 : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
@@ -104,7 +104,7 @@ export const Dashboard: React.FC = () => {
           </button>
           <button
             onClick={() => setCurrentView('history')}
-            className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+            className={`px-3 sm:px-4 py-2 rounded-lg font-medium transition-colors whitespace-nowrap ${
               currentView === 'history'
                 ? 'bg-blue-600 text-white'
                 : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
@@ -119,16 +119,16 @@ export const Dashboard: React.FC = () => {
 
         {/* Content */}
         {currentView === 'search' ? (
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             <SearchForm onSearch={handleSearch} loading={loading} />
             
             {error && (
-              <div className="max-w-4xl mx-auto">
+              <div className="max-w-4xl mx-auto px-4 sm:px-0">
                 <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
                   <div className="text-red-800 dark:text-red-200 font-medium">
                     Search Error
                   </div>
-                  <div className="text-red-600 dark:text-red-400 text-sm mt-1">
+                  <div className="text-red-600 dark:text-red-400 text-sm mt-1 break-words">
                     {error}
                   </div>
                 </div>
